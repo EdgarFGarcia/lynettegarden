@@ -24,3 +24,14 @@ Route::get('/logout', function(){
     Auth::logout();
     return Redirect::to('login');
 });
+
+/**
+ * 
+ * api calls prerequisite for adding a user
+ */
+Route::get('/getpositions', [App\Http\Controllers\APIControllers::class, 'getpositions'])->middleware('auth');
+Route::post('/adduser', [App\Http\Controllers\APIControllers::class, 'adduser'])->middleware('auth');
+Route::get('/fetchusers', [App\Http\Controllers\APIControllers::class, 'fetchusers'])->middleware('auth');
+Route::get('/getthisuser', [App\Http\Controllers\APIControllers::class, 'getthisuser'])->middleware('auth');
+Route::put('/edituser', [App\Http\Controllers\APIControllers::class, 'edituser'])->middleware('auth');
+Route::delete('/deletethisuser', [App\Http\Controllers\APIControllers::class, 'deletethisuser'])->middleware('auth');
