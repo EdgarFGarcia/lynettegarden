@@ -18,6 +18,7 @@ class Themes extends Migration
             $table->string('name');
             $table->foreignId('category_id');
             $table->foreign('category_id')->references('id')->on('category');
+            $table->bigInteger('min_pax');
             $table->bigInteger('max_pax');
             $table->timestamps();
             $table->softDeletes();
