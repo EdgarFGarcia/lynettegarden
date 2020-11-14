@@ -1,0 +1,120 @@
+/*----------------------------NAVIGATION-------------------------*/
+
+#nav-bar
+{
+    padding-left: 0;
+    padding-right: 0px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar-brand img
+{
+    height: 40px;
+    padding:-left: 30;
+}
+.navbar-nav li
+{
+    padding: 0 10px;
+}
+.navbar-nav li a
+{
+    float: right;
+    text-align: left;
+}
+#nav-bar ul li a:hover{
+    color: orange!important;
+}
+.navbar
+{
+    background-color: lightgoldenrodyellow;
+}
+b {color: rosybrown}span{color: orange}
+#nav-bar b
+{
+    
+    margin-left: 80px;
+    font-size: 24px;
+}
+.navbar-toggler
+{
+    border: none!important;
+}
+.nav-link
+{
+    color: #333!important;
+    font-weight: 600;
+    font-size: 16px;
+}
+.firstLogoName
+{
+    color: Orange;
+}
+
+.secondLogoName 
+{
+    color: coral;
+}
+
+/*----------------------------Contact us------------------------------*/
+
+#contact
+{
+    background: #e5e7e9;
+    padding-top: 230px;
+    padding-bottom: 240px;
+    color: #555;
+    
+}
+.contact-form
+{
+    padding: 15px;
+}
+.form-control
+{
+    border-radius: 0 !important;
+    border: none !important;
+}
+::placeholder
+{
+    color: #999 !important;
+}
+.follow
+{
+    background: white;
+    padding: 10px;
+    margin: 15px;
+}
+.contact-info .fa
+{
+    margin: 10px;
+    color: #007bff;
+    font-weight: bold;
+}
+/*------------------------------footer---------------------------*/
+
+#footer
+{
+    background: #303036;
+    color: #d3d3d3;
+    height:  50px;
+    position: relative;
+}
+#footer .footer-content
+{
+    border: 1px solid white;
+    height: 0x;
+}
+
+#footer .footer-bottom
+{
+    background: #343a40;
+    color: #686868;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding-top: 20px;
+}

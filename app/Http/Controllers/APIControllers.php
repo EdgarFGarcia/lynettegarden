@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Position;
 use App\Models\User;
+use App\Models\Reservation;
+use App\Models\Theme;
 use Validator;
 use Hash;
 
@@ -118,5 +120,111 @@ class APIControllers extends Controller
             'data'          => User::where('id', $request->id)->delete(),
             'message'       => "Deleting User Successful"
         ], 200);
+    }
+
+    public function getthemeswedding(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Theme::where('category_id', 1)->get()
+        ], 200);
+        // Theme::where('category_id', 1)->get();
+    }
+
+    public function getbirthdaythemes(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Theme::where('category_id', 2)->get()
+        ], 200);
+    }
+
+    public function getsocialgathering(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Theme::where('category_id', 4)->get()
+        ], 200);
+    }
+
+    public function getgardenevents(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Theme::where('category_id', 3)->get()
+        ], 200);
+    }
+
+    public function checkdatetimeavailability(Request $request){
+
+        $validation = Validator::make($request->all(),[
+            'date'      => 'required|date',
+            'time'      => 'required'
+        ]);
+
+        if($validation->fails()){
+            $error = $validation->messages()->first();
+            return response()->json([
+                'response'      => false,
+                'message'       => $error
+            ], 200);
+        }
+
+        $checkifavailable = Reservation::where('date_of_reservation', $request->date)->get();
+
+        if(sizeof($checkifavailable) < 3){
+            $checktime = Reservation::where('time_of_reservation', $request->time)->get();
+            return response()->json([
+                'response'      => true,
+                'message'       => "Available Date And Time"
+            ], 200);
+        }
+
+    }
+
+    public function makereservation(Request $request){
+        $validation = Validator::make($request->all(), [
+            'firstname'         => 'required|string',
+            'lastname'          => 'required|string',
+            'dateofbirth'       => 'required|date',
+            'emailaddress'      => 'required|email',
+            'contactnumber'     => 'required|numeric',
+            'bldgno'            => 'required|string',
+            'barangay'          => 'required|string',
+            'city'              => 'required|string',
+            'state'             => 'required|string',
+            'country'           => 'required|string',
+            'date'              => 'required|date',
+            'time'              => 'required'
+        ]);
+        
+        if($validation->fails()){
+            $error = $validation->messages()->first();
+            return response()->json([
+                'response'      => false,
+                'message'       => $error
+            ], 200);
+        }
+        $getprice = Theme::where('id', $request->themeid)->get();
+        $partialprice = $getprice[0]->price / 2;
+        $savedata = Reservation::create([
+            'mobile_number'         => $request->contactnumber,
+            'email'                 => $request->emailaddress,
+            'housenumber'           => $request->bldgno,
+            'barangay'              => $request->barangay,
+            'city'                  => $request->city,
+            'state'                 => $request->state,
+            'country'               => $request->country,
+            'themes_id'             => $request->themeid,
+            'price'                 => $getprice[0]->price,
+            'partial_price'         => $partialprice,
+            'date_of_reservation'   => $request->date,
+            'time_of_reservation'   => $request->time
+        ]);
+
+        if($savedata){
+            return response()->json([
+                'response'          => true,
+                'message'           => "Successful Reservation",
+                'data'              => $savedata
+            ], 200);
+        }
+
     }
 }

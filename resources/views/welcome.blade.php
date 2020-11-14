@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{--<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -29,9 +29,9 @@
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
 
-                        {{--@if (Route::has('register'))
+                        @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        @endif--}}
+                        @endif
                     @endif
                 </div>
             @endif
@@ -129,4 +129,67 @@
             </div>
         </div>
     </body>
-</html>
+</html>--}}
+
+
+@extends('layouts.mainindex')
+
+
+@section('content')
+    <!----------------------------------Portfolio------------------------------>
+    
+    <section id="portfolio">
+        <div class="container">
+            <h1>Our Portfolio</h1>
+            <div class="row portfolio">
+            <div class="col-md-3 text-center">
+                <div class="card" style="width: 16rem; background-color: rgba(178,178,178,0.25)">
+                <img src="img/Wedding%20picture.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">WEDDINGS</h5>
+                    <p class="card-text">The highest happiness on earth is the happiness of marriage, plan your wedding now!</p>
+                    <a href="{{ url('/wedding') }}" class="btn btn-light">Plan Wedding</a>
+                </div>
+                </div>
+                </div>  
+                
+            <div class="col-md-3 text-center">
+                <div class="card" style="width: 16rem; background-color: rgba(244,128,0,0.25)">
+                <img src="img/Birthday%20picture.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">BIRTHDAYS</h5>
+                    <p class="card-text">May your birthday bring you as much happiness as you give to everyone who knows you. set your party now!</p>
+                    <a href="{{ url('/birthday') }}" class="btn btn-light">Plan Birthday</a>
+                </div>
+                </div>
+                </div>
+                
+            <div class="col-md-3 text-center">
+                <div class="card" style="width: 16rem; background-color: rgba(131,7,242,0.25)">
+                <img src="img/Social%20Gathering%20picture.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">SOCIAL GATHERINGS</h5>
+                    <p class="card-text">Not interacting with all your people will never know how amazing and creative they can be, plan your gathering now!</p>
+                    <a href="{{ url('/social') }}" class="btn btn-light">Plan Gathering</a>
+                </div>
+                </div>
+                </div>
+            
+            <div class="col-md-3 text-center">
+                <div class="card" style="width: 16rem; background-color: rgba(11,156,49,0.25)">
+                <img src="img/garden%20event%20picture.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">GARDEN EVENTS</h5>
+                    <p class="card-text">Gather and invite your people with our wonderful garden venue and be socialize, Book with us now!</p>
+                    <a href="{{ url('/garden') }}" class="btn btn-light">Plan Garden Party</a>
+                </div>
+                </div>
+</div>
+</div>
+</div>
+</section>
+@endsection
+
+@section('script')
+
+@endsection

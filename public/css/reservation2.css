@@ -1,0 +1,158 @@
+/*----------------------------NAVIGATION-------------------------*/
+
+#nav-bar
+{
+    padding-left: 0;
+    padding-right: 0px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar-brand img
+{
+    height: 40px;
+    padding:-left: 30;
+}
+.navbar-nav li
+{
+    padding: 0 10px;
+}
+.navbar-nav li a
+{
+    float: right;
+    text-align: left;
+}
+#nav-bar ul li a:hover{
+    color: orange!important;
+}
+.navbar
+{
+    background-color: lightgoldenrodyellow;
+}
+b {color: rosybrown}span{color: orange}
+#nav-bar b
+{
+    
+    margin-left: 80px;
+    font-size: 24px;
+}
+.navbar-toggler
+{
+    border: none!important;
+}
+.nav-link
+{
+    color: #333!important;
+    font-weight: 600;
+    font-size: 16px;
+}
+.firstLogoName
+{
+    color: Orange;
+}
+
+.secondLogoName 
+{
+    color: coral;
+}
+
+    /*----------------------------RESERVATION-FORM------------------*/
+#reservation-page
+{
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(img/wallpaper.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.reservation-form
+{
+    width: 400px;
+    height: 570px;
+    background: rgba(178, 178, 178, 0.3); 
+    color: #fff;
+    top: 50%;
+    left: 30%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 70px 30px;
+}
+.reservation-form p
+{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 14;
+}
+.reservation-form input
+{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.reservation-form input[type="text"], input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.information
+{
+    float: right;
+    margin-top: 320px;
+    margin-right: 250px;
+    color: orange;
+}
+.information h1
+{
+    font-size: 74;
+}
+.information p
+{
+    font-size: 14;
+    color: coral;
+}
+.reservation-form .contact
+{
+    width: 70px;
+    height: 70px;
+    margin-top: -50px;
+}
+.contact
+{
+    margin-right: 50px;
+}
+.reservation-form .btn
+{
+    width: 340px;
+    margin-top: 80px;
+}
+.reservation-form p
+{
+    font-size: 14;
+    font-weight: 100;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
