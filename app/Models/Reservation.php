@@ -16,6 +16,7 @@ class Reservation extends Model
         'barangay',
         'city',
         'state',
+        'controlnumber',
         'country',
         'themes_id',
         'price',

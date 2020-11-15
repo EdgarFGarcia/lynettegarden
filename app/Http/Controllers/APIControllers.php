@@ -201,6 +201,12 @@ class APIControllers extends Controller
                 'message'       => $error
             ], 200);
         }
+
+        $forcontrolnumber = date("Y-m-d H:i:s");
+        $trimspaces = str_replace(' ', '', $forcontrolnumber);
+        $trimdash = str_replace('-', '', $trimspaces);
+        $controlnumber = str_replace(':', '', $trimdash);
+
         $getprice = Theme::where('id', $request->themeid)->get();
         $partialprice = $getprice[0]->price / 2;
         $savedata = Reservation::create([
@@ -215,7 +221,8 @@ class APIControllers extends Controller
             'price'                 => $getprice[0]->price,
             'partial_price'         => $partialprice,
             'date_of_reservation'   => $request->date,
-            'time_of_reservation'   => $request->time
+            'time_of_reservation'   => $request->time,
+            'controlnumber'         => $controlnumber
         ]);
 
         if($savedata){

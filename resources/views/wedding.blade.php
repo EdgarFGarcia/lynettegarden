@@ -233,7 +233,7 @@
     });
 
     $(document).on('click', '#proceedreservation', function(){
-        $('#proceedreservation').attr("hidden", true);
+        // $('#proceedreservation').attr("hidden", true);
         var themeidtopass = themeid;
         var pricetopass = $('#pricetopass').val();
         console.log(themeid, pricetopass);
