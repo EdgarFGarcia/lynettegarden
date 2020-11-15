@@ -23,11 +23,57 @@
                 <a class="nav-link" href="#location">LOCATION</a>
               </li>        
             </ul>
-              <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Input Reference No." aria-label="Search">
-              <button class="btn btn-warning my-2 my-sm-0" type="submit">Search Code</button>
-            </form>
+              <div class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" id="controlnumber" placeholder="Input Reference No." aria-label="Search">
+                <button class="btn btn-warning my-2 my-sm-0" id="searchcontrolnumber" type="submit">Search Code</button>
+              </div>
           </div>
         </nav>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="controlnumbermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="hidden" id="controlnumberid"/>
+                <label for="cnname">Customer Name:</label>
+                <input type="text" id="cnname" class="form-control" disabled/>
+                <label for="cnemail">Email:</label>
+                <input type="text" id="cnemail" class="form-control" disabled/>
+                <label for="cnmobilenumber">Mobile Number:</label>
+                <input type="text" id="cnmobilenumber" class="form-control" disabled/>
+              </div>
+              <div class="col-md-6">
+                <label for="cnreservationdate">Reservation Date:</label>
+                <input type="text" id="cnreservationdate" class="form-control" disabled/>
+                <label for="cnthemename">Theme Name:</label>
+                <input type="text" id="cnthemename" class="form-control" disabled/>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="cnprice">Theme Price:</label>
+                    <input type="text" id="cnprice" class="form-control" disabled/>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="cnpartialprice">Theme Partial Price:</label>
+                    <input type="text" id="cnpartialprice" class="form-control" disabled/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="cancelreservation">Cancel Reservation</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!---------------------------------------------------Slider-------------------------------------->

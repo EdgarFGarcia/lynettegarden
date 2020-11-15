@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\Theme;
 use Validator;
 use Hash;
+use DB;
 
 class APIControllers extends Controller
 {
@@ -210,6 +211,8 @@ class APIControllers extends Controller
         $getprice = Theme::where('id', $request->themeid)->get();
         $partialprice = $getprice[0]->price / 2;
         $savedata = Reservation::create([
+            'firstname'             => $request->firstname,
+            'lastname'              => $request->lastname,
             'mobile_number'         => $request->contactnumber,
             'email'                 => $request->emailaddress,
             'housenumber'           => $request->bldgno,
@@ -233,5 +236,53 @@ class APIControllers extends Controller
             ], 200);
         }
 
+    }
+
+    public function searchthiscontrolnumber(Request $request){
+        $validation = Validator::make($request->all(),[
+            'controlnumber'     => 'required|numeric'
+        ]);
+
+        if($validation->fails()){
+            $error = $validation->messages()->first();
+            return response()->json([
+                'response'      => false,
+                'message'       => $error
+            ], 200);
+        }
+
+        return response()->json([
+            'response'      => true,
+            'data'          => DB::connection('mysql')
+                            ->table('reservations as a')
+                            ->select(
+                                'a.id as id',
+                                'a.controlnumber as controlnumber',
+                                DB::raw("CONCAT(a.firstname, ' ', a.lastname) as name"),
+                                DB::raw("DATE_FORMAT(a.date_of_reservation, '%D of %M %Y') as reservationdate"),
+                                'a.email as email',
+                                'a.mobile_number as mobilenumber',
+                                'b.name as themename',
+                                // 'b.price as themeprice',
+                                // 'a.partial_price as partialprice'
+                                DB::raw("FORMAT(b.price, 2) as themeprice"),
+                                DB::raw("FORMAT(a.partial_price, 2) as partialprice")
+                            )
+                            ->join('themes as b', 'a.themes_id', '=', 'b.id')
+                            ->where('a.controlnumber', $request->controlnumber)
+                            ->get()->first()
+        ]);
+    }
+
+    public function cancelreservation(Request $request){
+        return response()->json([
+            'response'          => true,
+            'data'              => Reservation::where('id', (int)$request->id)
+                                ->update([
+                                    'is_cancelled'      => 1,
+                                    'updated_at'        => date("Y-m-d H:i:s")
+                                ]),
+            'message'           => "Cancellation Request Sent"
+        ]);
     }
 }

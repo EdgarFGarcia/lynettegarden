@@ -75,3 +75,15 @@ Route::get('/garden', [App\Http\Controllers\PageControllers::class, 'garden']);
  * Api Call for making reservation
  */
 Route::post('/makereservation', [App\Http\Controllers\APIControllers::class, 'makereservation']);
+
+/**
+ * 
+ * Search Control Number
+ */
+Route::get('/searchthiscontrolnumber', [App\Http\Controllers\APIControllers::class, 'searchthiscontrolnumber']);
+
+/**
+ * 
+ * Cancel Reservation
+ */
+Route::put('/cancelreservation', [App\Http\Controllers\APIControllers::class, 'cancelreservation']);
