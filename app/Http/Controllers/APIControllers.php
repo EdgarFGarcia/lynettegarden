@@ -11,10 +11,16 @@ use App\Models\Theme;
 use Validator;
 use Hash;
 use DB;
+use Carbon\Carbon;
 
 class APIControllers extends Controller
 {
     //
+    public $now;
+    public function __construct(){
+        $this->now = Carbon::now();
+    }
+
     public function getpositions(){
         $data = Position::get();
         return response()->json([
@@ -284,5 +290,26 @@ class APIControllers extends Controller
                                 ]),
             'message'           => "Cancellation Request Sent"
         ]);
+    }
+
+    public function getreservationcount(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Reservation::whereBetween('date_of_reservation', [$this->now->startOfMonth()->format("Y-m-d"), $this->now->endOfMonth()->format("Y-m-d")])->whereNull('deleted_at')->get()->count()
+        ], 200);
+    }
+
+    public function getcancelledreservation(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Reservation::whereBetween('date_of_reservation', [$this->now->startOfMonth()->format("Y-m-d"), $this->now->endOfMonth()->format("Y-m-d")])->whereNotNull('deleted_at')->get()->count()
+        ], 200);
+    }
+
+    public function getconfirmedreservation(){
+        return response()->json([
+            'response'      => true,
+            'data'          => Reservation::whereBetween('date_of_reservation', [$this->now->startOfMonth()->format("Y-m-d"), $this->now->endOfMonth()->format("Y-m-d")])->whereNull('deleted_at')->where('is_paid_full', 1)->where('is_partial_paid', 1)->get()->count()
+        ], 200);
     }
 }

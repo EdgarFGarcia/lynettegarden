@@ -87,3 +87,11 @@ Route::get('/searchthiscontrolnumber', [App\Http\Controllers\APIControllers::cla
  * Cancel Reservation
  */
 Route::put('/cancelreservation', [App\Http\Controllers\APIControllers::class, 'cancelreservation']);
+
+/**
+ * 
+ * Reports web call
+ */
+Route::get('/getreservationcount', [App\Http\Controllers\APIControllers::class, 'getreservationcount'])->middleware('auth');
+Route::get('/getcancelledreservation', [App\Http\Controllers\APIControllers::class, 'getcancelledreservation'])->middleware('auth');
+Route::get('/getconfirmedreservation', [App\Http\Controllers\APIControllers::class, 'getconfirmedreservation'])->middleware('auth');

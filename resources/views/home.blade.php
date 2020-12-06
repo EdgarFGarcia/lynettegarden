@@ -40,7 +40,7 @@
             <div class="col-7 col-md-8">
                 <div class="numbers">
                     <p class="card-category">Reservation</p>
-                    <p class="card-title">150<p>
+                    <p class="card-title reservationtitle"><p>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-refresh"></i>
+                <i class="fa fa-refresh refreshreservationtitle"></i>
                 Update Now
             </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="col-7 col-md-8">
                 <div class="numbers">
                     <p class="card-category">Cancel Reservation</p>
-                    <p class="card-title">150<p>
+                    <p class="card-title cancelledtitle"><p>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-refresh"></i>
+                <i class="fa fa-refresh refreshcancelledtitle"></i>
                 Update Now
             </div>
         </div>
@@ -94,7 +94,7 @@
             <div class="col-7 col-md-8">
                 <div class="numbers">
                     <p class="card-category">Confirm Reservation</p>
-                    <p class="card-title">150<p>
+                    <p class="card-title confirmedtitle"><p>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-refresh"></i>
+                <i class="fa fa-refresh refreshconfirmedtitle"></i>
                 Update Now
             </div>
         </div>
@@ -200,6 +200,53 @@ $(document).ready(function(){
     $('#userstable').DataTable();
     getuserpositions();
     fetchusers();
+    fetchreservationthismonth();
+    fetchcancelledreservation();
+    fetchconfirmedreservation();
+});
+
+function fetchreservationthismonth(){
+    $.ajax({
+        url: "{{ url('/getreservationcount') }}",
+        method: "GET"
+    }).done(function(response){
+        // console.log(response);
+        // alert(response.data);
+        $('.reservationtitle').text("");
+        $('.reservationtitle').text(response.data);
+    });
+}
+
+$(document).on('click', '.refreshreservationtitle', function(){
+    fetchreservationthismonth();
+});
+
+function fetchcancelledreservation(){
+    $.ajax({
+        url: "{{ url('/getcancelledreservation') }}",
+        method: "GET"
+    }).done(function(response){
+        $('.cancelledtitle').text("");
+        $('.cancelledtitle').text(response.data);
+    });
+}
+
+$(document).on('click', '.refreshcancelledtitle', function(){
+    fetchcancelledreservation();
+});
+
+function fetchconfirmedreservation(){
+    $.ajax({
+        url: "{{ url('/getconfirmedreservation') }}",
+        method: "GET"
+    }).done(function(response){
+        $('.confirmedtitle').text("");
+        $('.confirmedtitle').text(response.data);
+    });
+}
+
+$(document).on('click', '.refreshconfirmedtitle', function(){
+    fetchconfirmedreservation();
 });
 
 function getuserpositions(){
