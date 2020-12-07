@@ -312,4 +312,81 @@ class APIControllers extends Controller
             'data'          => Reservation::whereBetween('date_of_reservation', [$this->now->startOfMonth()->format("Y-m-d"), $this->now->endOfMonth()->format("Y-m-d")])->whereNull('deleted_at')->where('is_paid_full', 1)->where('is_partial_paid', 1)->get()->count()
         ], 200);
     }
+
+    public function fetchmanagereservation(){
+        $getdata = Reservation::with(['fetchreservationwiththemes'])->get();
+        $data = [];
+        foreach($getdata as $out){
+            $data[] = [
+                'id'                => $out->id,
+                'name'              => $out->firstname . " " . $out->lastname,
+                'mobile'            => $out->mobile_number,
+                'email'             => $out->email,
+                'control_number'    => $out->controlnumber,
+                'theme'             => $out->fetchreservationwiththemes->name,
+                'price'             => $out->price,
+                'partial_price'     => $out->partial_price,
+                'is_paid_full'      => $out->is_paid_full == 0 ? "No" : "Yes",
+                'is_paid_partial'   => $out->is_partial_paid == 0 ? "No" : "Yes",
+                'is_done'           => $out->is_done == 0 ? "No" : "Yes"
+            ];
+        }
+
+        return response()->json([
+            'response'          => true,
+            'data'              => $data
+        ], 200);
+    }
+
+    public function getthisrecord(Request $request){
+        $getdata = Reservation::with(['fetchreservationwiththemes'])->where('id', $request->id)->first();
+
+        $data = [
+            'id'                => $getdata->id,
+            'name'              => $getdata->firstname . ' ' . $getdata->lastname,
+            'mobile'            => $getdata->mobile_number,
+            'email'             => $getdata->email,
+            'control_number'    => $getdata->controlnumber,
+            'theme'             => $getdata->fetchreservationwiththemes->name,
+            'price'             => $getdata->price,
+            'partial_price'     => $getdata->partial_price,
+            'is_paid_full'      => $getdata->is_paid_full == 0 ? "No" : "Yes",
+            'is_paid_partial'   => $getdata->is_partial_paid == 0 ? "No" : "Yes",
+            'is_done'           => $getdata->is_done == 0 ? "No" : "Yes"
+        ];
+
+        return response()->json([
+            'response'          => true,
+            'data'              => $data
+        ], 200);
+
+    }
+
+    public function updatereservationinformation(Request $request){
+        if($request->ispaidfull == "true"){
+            Reservation::where('id', $request->id)
+            ->update([
+                'is_paid_full'          => 1
+            ]);
+        }
+
+        if($request->ispaidpartial == "true"){
+            Reservation::where('id', $request->id)
+            ->update([
+                'is_partial_paid'       => 1
+            ]);
+        }
+
+        if($request->isdone == "true"){
+            Reservation::where('id', $request->id)
+            ->update([
+                'is_done'               => 1
+            ]);
+        }
+
+        return response()->json([
+            'response'                  => true,
+            'message'                   => "Update Successful"
+        ], 200);
+    }
 }

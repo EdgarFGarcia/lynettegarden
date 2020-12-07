@@ -22,4 +22,8 @@ class PageControllers extends Controller
     public function garden(){
         return view('garden');
     }
+
+    public function managereservation(){
+        return view('managereservation');
+    }
 }

@@ -22,7 +22,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{ url('/managereservation') }}">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>Manage Reservation</p>
             </a>
