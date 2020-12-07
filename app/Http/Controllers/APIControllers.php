@@ -389,4 +389,39 @@ class APIControllers extends Controller
             'message'                   => "Update Successful"
         ], 200);
     }
+
+    public function fetchcancelrequest(){
+        $cancelrequest = Reservation::with(['fetchreservationwiththemes'])->where('is_cancelled', 1)->get();
+        $data = [];
+        foreach($cancelrequest as $out){
+            // $is24hours;
+            // if ($out->date_of_reservation <= (time() + 86400)) {
+            //     $is24hours = "Yes";
+            // }else{
+            //     $is24hours = "No";
+            // }
+            // $data[] = [
+            //     'is24hours'     => $out->date_of_reservation <= (time() + 86400) ? "Yes" : "No"
+            // ];
+            $data[] = [
+                'id'                    => $out->id,
+                'name'                  => $out->firstname . " " . $out->lastname,
+                'mobile'                => $out->mobile_number,
+                'email'                 => $out->email,
+                'control_number'        => $out->controlnumber,
+                'theme'                 => $out->fetchreservationwiththemes->name,
+                'price'                 => $out->price,
+                'partial_price'         => $out->partial_price,
+                'is_paid_full'          => $out->is_paid_full == 0 ? "No" : "Yes",
+                'is_paid_partial'       => $out->is_partial_paid == 0 ? "No" : "Yes",
+                'is_done'               => $out->is_done == 0 ? "No" : "Yes",
+                'date_of_reservation'   => $out->date_of_reservation,
+                'time_of_reservation'   => $out->time_of_reservation
+            ];
+        }
+        return response()->json([
+            'response'                  => true,
+            'data'                      => $data
+        ], 200);
+    }
 }

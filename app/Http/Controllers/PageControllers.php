@@ -26,4 +26,8 @@ class PageControllers extends Controller
     public function managereservation(){
         return view('managereservation');
     }
+
+    public function managecancelrequest(){
+        return view('managecancelrequest');
+    }
 }

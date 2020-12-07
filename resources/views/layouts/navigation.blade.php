@@ -28,7 +28,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{ url('/managecancelrequest') }}">
               <i class="nc-icon nc-alert-circle-i"></i>
               <p>Cancel Reservation</p>
             </a>

@@ -34,6 +34,8 @@ class Reservation extends Model
         'deleted_at'
     ];
 
+    // protected $dates = ['created_at', 'updated_at', 'date_of_reservation'];
+
     public function fetchreservationwiththemes(){
         return $this->hasOne('App\Models\Theme', 'id', 'themes_id');
     }

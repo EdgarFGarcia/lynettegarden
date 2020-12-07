@@ -25,6 +25,7 @@ Route::get('/logout', function(){
     return Redirect::to('login');
 });
 Route::get('/managereservation', [App\Http\Controllers\PageControllers::class, 'managereservation'])->middleware('auth');
+Route::get('/managecancelrequest', [App\Http\Controllers\PageControllers::class, 'managecancelrequest'])->middleware('auth');
 
 /**
  * 
@@ -104,3 +105,9 @@ Route::get('/getconfirmedreservation', [App\Http\Controllers\APIControllers::cla
 Route::get('/fetchmanagereservation', [App\Http\Controllers\APIControllers::class, 'fetchmanagereservation'])->middleware('auth');
 Route::get('/getthisrecord', [App\Http\Controllers\APIControllers::class, 'getthisrecord'])->middleware('auth');
 Route::post('/updatereservationinformation', [App\Http\Controllers\APIControllers::class, 'updatereservationinformation'])->middleware('auth');
+
+/**
+ * 
+ * Manage Cancel Request
+ */
+Route::get('/fetchcancelrequest', [App\Http\Controllers\APIControllers::class, 'fetchcancelrequest'])->middleware('auth');
