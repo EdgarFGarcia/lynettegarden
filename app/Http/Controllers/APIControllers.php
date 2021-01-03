@@ -12,6 +12,8 @@ use Validator;
 use Hash;
 use DB;
 use Carbon\Carbon;
+use Mail;
+use Nexmo;
 
 class APIControllers extends Controller
 {
@@ -232,6 +234,28 @@ class APIControllers extends Controller
             'date_of_reservation'   => $request->date,
             'time_of_reservation'   => $request->time,
             'controlnumber'         => $controlnumber
+        ]);
+
+        // TODO send email
+        $to_name    = $request->firstname . " " . $request->lastname;
+        $to_email   = $request->emailaddress;
+        $data = array(
+            "name"              => $request->firstname . " " . $request->lastname, 
+            "partial"           => $partialprice, 
+            "full_payment"      => $getprice[0]->price,
+            "control_number"    => $controlnumber,
+            "reservation_date"  => $request->date
+        );
+        Mail::send("emails.mail", $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject("Partial / Full Payment Fulfillment");
+        $message->from("lieraarciaga08@gmail.com","Partial / Full Payment Fulfillment");
+        });
+
+        Nexmo::message()->send([
+            'to'   => '639063504121',
+            'from' => 'Vonage APIs',
+            'text' => 'Hi There! An email has been sent to ' . $request->emailaddress . ' and here is your control number ' . $controlnumber . ' Thank you!'
         ]);
 
         if($savedata){
