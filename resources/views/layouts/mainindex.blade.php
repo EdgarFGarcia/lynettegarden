@@ -49,7 +49,7 @@
 <div class="col-md-8">
 <h2 align="center">WELCOME</h2>
 <div class="about-content">
-
+    hello world
     LYNETTE GARDENS is an event management production, organizer based in Pasig, Metro Manila<p/><br/>
     
     We  specializes in the  conceptualization, organization, management and execution of  events providing a complete service from the planning stage through to the seamless delivery of the event.<p/><br/>
