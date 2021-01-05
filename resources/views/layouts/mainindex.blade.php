@@ -49,7 +49,7 @@
 <div class="col-md-8">
 <h2 align="center">WELCOME</h2>
 <div class="about-content">
-    hello world
+
     LYNETTE GARDENS is an event management production, organizer based in Pasig, Metro Manila<p/><br/>
     
     We  specializes in the  conceptualization, organization, management and execution of  events providing a complete service from the planning stage through to the seamless delivery of the event.<p/><br/>
@@ -121,7 +121,7 @@
                 <a href="https://www.instagram.com/anthonyalcazar08/"><li><i class="fa fa-instagram"></i></li></a>
             </ul>
              </div>
-                <h2>Alcazar, Anthony</h2>
+                <h2>Lawagan, Nathaniel</h2>
                 <h3>Back-End / Database</h3>
                 <p>Associate with data access layer of software or hardware and includes any functionality that needs to be accessed and navigated to by digital means.</p>
             </div>
