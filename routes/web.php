@@ -26,6 +26,8 @@ Route::get('/logout', function(){
 });
 Route::get('/managereservation', [App\Http\Controllers\PageControllers::class, 'managereservation'])->middleware('auth');
 Route::get('/managecancelrequest', [App\Http\Controllers\PageControllers::class, 'managecancelrequest'])->middleware('auth');
+Route::get('/generatereports', [App\Http\Controllers\PageControllers::class, 'generatereports'])->middleware('auth');
+Route::get('/cancellationconfirmation', [App\Http\Controllers\PageControllers::class, 'cancellationconfirmation'])->middleware('auth');
 
 /**
  * 
@@ -105,9 +107,18 @@ Route::get('/getconfirmedreservation', [App\Http\Controllers\APIControllers::cla
 Route::get('/fetchmanagereservation', [App\Http\Controllers\APIControllers::class, 'fetchmanagereservation'])->middleware('auth');
 Route::get('/getthisrecord', [App\Http\Controllers\APIControllers::class, 'getthisrecord'])->middleware('auth');
 Route::post('/updatereservationinformation', [App\Http\Controllers\APIControllers::class, 'updatereservationinformation'])->middleware('auth');
+Route::delete('/deletethisreservation', [App\Http\Controllers\APIControllers::class, 'deletethisreservation'])->middleware('auth');
 
 /**
  * 
  * Manage Cancel Request
  */
 Route::get('/fetchcancelrequest', [App\Http\Controllers\APIControllers::class, 'fetchcancelrequest'])->middleware('auth');
+Route::get('/tobecancelled', [App\Http\Controllers\APIControllers::class, 'tobecancelled'])->middleware('auth');
+Route::post('/confirmcancellation', [App\Http\Controllers\APIControllers::class, 'confirmcancellation'])->middleware('auth');
+
+/**
+ * Generate Reports Web Call
+ */
+Route::get('/generatereport', [App\Http\Controllers\APIControllers::class, 'generatereport'])->middleware('auth');
+Route::get('/searchthisreport', [App\Http\Controllers\APIControllers::class, 'searchthisreport'])->middleware('auth');

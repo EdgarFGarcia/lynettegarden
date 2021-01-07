@@ -414,19 +414,25 @@ class APIControllers extends Controller
         ], 200);
     }
 
+    public function deletethisreservation(Request $request){
+        $data = Reservation::where('id', $request->id)->delete();
+        if($data){
+            return response()->json([
+                'response'              => true,
+                'message'               => "Successfully deleted"
+            ], 200);
+        }else{
+            return response()->json([
+                'response'              => false,
+                'message'               => "There's an error deleting this record"
+            ], 200);
+        }
+    }
+
     public function fetchcancelrequest(){
         $cancelrequest = Reservation::with(['fetchreservationwiththemes'])->where('is_cancelled', 1)->get();
         $data = [];
         foreach($cancelrequest as $out){
-            // $is24hours;
-            // if ($out->date_of_reservation <= (time() + 86400)) {
-            //     $is24hours = "Yes";
-            // }else{
-            //     $is24hours = "No";
-            // }
-            // $data[] = [
-            //     'is24hours'     => $out->date_of_reservation <= (time() + 86400) ? "Yes" : "No"
-            // ];
             $data[] = [
                 'id'                    => $out->id,
                 'name'                  => $out->firstname . " " . $out->lastname,
@@ -448,4 +454,138 @@ class APIControllers extends Controller
             'data'                      => $data
         ], 200);
     }
+
+    public function tobecancelled(){
+        $cancelrequest = Reservation::with(['fetchreservationwiththemes'])->where('is_cancelled', 1)->where('is_email_sent', 0)->onlyTrashed()->get();
+        $data = [];
+        foreach($cancelrequest as $out){
+            $data[] = [
+                'id'                    => $out->id,
+                'name'                  => $out->firstname . " " . $out->lastname,
+                'mobile'                => $out->mobile_number,
+                'email'                 => $out->email,
+                'control_number'        => $out->controlnumber,
+                'theme'                 => $out->fetchreservationwiththemes->name,
+                'price'                 => $out->price,
+                'partial_price'         => $out->partial_price,
+                'is_paid_full'          => $out->is_paid_full == 0 ? "No" : "Yes",
+                'is_paid_partial'       => $out->is_partial_paid == 0 ? "No" : "Yes",
+                'is_done'               => $out->is_done == 0 ? "No" : "Yes",
+                'date_of_reservation'   => $out->date_of_reservation,
+                'time_of_reservation'   => $out->time_of_reservation,
+                'date_of_cancellation'  => date_format($out->deleted_at,"Y/m/d H:i:s")
+            ];
+        }
+        return response()->json([
+            'response'                  => true,
+            'data'                      => $data
+        ], 200);
+    }
+
+    public function confirmcancellation(Request $request){
+        $updaterecord = DB::table('reservations')->where('id', $request->id)
+        ->update([
+            'is_email_sent'             => 1
+        ]);
+
+        $searchuser = DB::table('reservations')
+        ->where('id', $request->id)
+        ->get()->first();
+
+        $to_name    = $searchuser->firstname . " " . $searchuser->lastname;
+        $to_email   = $searchuser->email;
+        $data = array(
+            "name"              => $searchuser->firstname . " " . $searchuser->lastname,
+            'control_number'    => $searchuser->controlnumber
+        );
+        Mail::send("emails.cancelledreservation", $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject("Cancellation Of Reservation");
+        $message->from("lieraarciaga08@gmail.com","Cancellation Of Reservation");
+        });
+
+        return response()->json([
+            'response'                  => true,
+            'message'                   => "Sending Email Notification was a success"
+        ], 200);
+
+    }
+
+    /**
+     * 
+     * Generate Reports
+     */
+    public function generatereport(){
+        $data = Reservation::where('is_paid_full', 1)->get();
+        
+        $total = [];
+
+        foreach($data as $out){
+            $total[] = $out->price;
+        }
+
+        $datas = [];
+        foreach($data as $out){
+            $datas[] = [
+                'id'                    => $out->id,
+                'name'                  => $out->firstname . " " . $out->lastname,
+                'mobile'                => $out->mobile_number,
+                'email'                 => $out->email,
+                'control_number'        => $out->controlnumber,
+                'theme'                 => $out->fetchreservationwiththemes->name,
+                'price'                 => $out->price,
+                'partial_price'         => $out->partial_price,
+                'is_paid_full'          => $out->is_paid_full == 0 ? "No" : "Yes",
+                'is_paid_partial'       => $out->is_partial_paid == 0 ? "No" : "Yes",
+                'is_done'               => $out->is_done == 0 ? "No" : "Yes",
+                'date_of_reservation'   => $out->date_of_reservation,
+                'time_of_reservation'   => $out->time_of_reservation
+            ];
+        }
+
+        $totalvalue = array_sum($total);
+        return response()->json([
+            'response'              => true,
+            'data'                  => $datas,
+            'total'                 => number_format(($totalvalue), 2, '.', ',')
+        ], 200);
+
+    }
+
+    public function searchthisreport(Request $request){
+        $data = Reservation::where('is_paid_full', 1)->whereBetween('date_of_reservation', [$request->startdate, $request->enddate])->get();
+        
+        $total = [];
+
+        foreach($data as $out){
+            $total[] = $out->price;
+        }
+
+        $datas = [];
+        foreach($data as $out){
+            $datas[] = [
+                'id'                    => $out->id,
+                'name'                  => $out->firstname . " " . $out->lastname,
+                'mobile'                => $out->mobile_number,
+                'email'                 => $out->email,
+                'control_number'        => $out->controlnumber,
+                'theme'                 => $out->fetchreservationwiththemes->name,
+                'price'                 => $out->price,
+                'partial_price'         => $out->partial_price,
+                'is_paid_full'          => $out->is_paid_full == 0 ? "No" : "Yes",
+                'is_paid_partial'       => $out->is_partial_paid == 0 ? "No" : "Yes",
+                'is_done'               => $out->is_done == 0 ? "No" : "Yes",
+                'date_of_reservation'   => $out->date_of_reservation,
+                'time_of_reservation'   => $out->time_of_reservation
+            ];
+        }
+
+        $totalvalue = array_sum($total);
+        return response()->json([
+            'response'              => true,
+            'data'                  => $datas,
+            'total'                 => number_format(($totalvalue), 2, '.', ',')
+        ], 200);
+    }
+
 }

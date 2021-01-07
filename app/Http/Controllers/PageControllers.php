@@ -30,4 +30,12 @@ class PageControllers extends Controller
     public function managecancelrequest(){
         return view('managecancelrequest');
     }
+
+    public function generatereports(){
+        return view('generatereports');
+    }
+
+    public function cancellationconfirmation(){
+        return view('cancellationconfirmation');
+    }
 }

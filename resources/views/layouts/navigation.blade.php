@@ -34,12 +34,12 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{ url('/cancellationconfirmation') }}">
               <i class="nc-icon nc-box"></i>
               <p>Confirm Cancellation</p>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#">
               <i class="nc-icon nc-bold"></i>
               <p>Billing</p>
@@ -50,9 +50,9 @@
               <i class="nc-icon nc-bookmark-2"></i>
               <p>Payment</p>
             </a>
-          </li>
+          </li> -->
           <li>
-            <a href="#">
+            <a href="{{ url('/generatereports') }}">
               <i class="nc-icon nc-money-coins"></i>
               <p>Generate Report</p>
             </a>

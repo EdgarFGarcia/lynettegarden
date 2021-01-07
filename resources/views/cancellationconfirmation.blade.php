@@ -48,6 +48,7 @@
                             <th>Is Paid Partial</th>
                             <th>Date Of Reservation</th>
                             <th>Time Of Reservation</th>
+                            <th>Time / Date of Cancellation</th>
                         </tr>
                     </thead>
                 </table>
@@ -67,7 +68,7 @@ $(document).ready(function(){
 });
 function loadcancelrequesttable(){
     $.ajax({
-        url: "{{ url('/fetchcancelrequest') }}",
+        url: "{{ url('/tobecancelled') }}",
         method: "GET"
     }).done(function(response){
         if(response.response){
@@ -85,7 +86,8 @@ function loadcancelrequesttable(){
                     {"data": "is_paid_full"},
                     {"data": "is_paid_partial"},
                     {"data": "date_of_reservation"},
-                    {"data": "time_of_reservation"}
+                    {"data": "time_of_reservation"},
+                    {"data": "date_of_cancellation"}
                 ]
             });
         }
@@ -95,16 +97,19 @@ function loadcancelrequesttable(){
 $(document).on('click', '#managecancelrequest tbody tr', function(){
     var data = managecancelrequest.row(this).data();
     var id = data['id'];
-    toastr.error("Do you want to delete this record? " +"<br/>"+ '<button class="btn btn-danger" onclick="deletethisreservation('+id+')">Yes</button>');
+    toastr.error("Do you confirm this deletion? " +"<br/>"+ '<button class="btn btn-danger" onclick="confirmcancellation('+id+')">Yes</button>');
 });
 
-function deletethisreservation(id){
+function confirmcancellation(id){
     $.ajax({
-        url: "{{ url('/deletethisreservation') }}",
-        method: "DELETE",
+        url: "{{ url('/confirmcancellation') }}",
+        method: "POST",
         data: {
             id: id,
             "_token": "{{ csrf_token() }}"
+        },
+        beforeSend: function() {
+            toastr.info("Please Wait...");
         }
     }).done(function(response){
         // console.log(response);
