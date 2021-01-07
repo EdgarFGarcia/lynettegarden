@@ -392,6 +392,11 @@ class APIControllers extends Controller
             ->update([
                 'is_paid_full'          => 1
             ]);
+        }else{
+            Reservation::where('id', $request->id)
+            ->update([
+                'is_paid_full'          => 0
+            ]);
         }
 
         if($request->ispaidpartial == "true"){
@@ -399,12 +404,22 @@ class APIControllers extends Controller
             ->update([
                 'is_partial_paid'       => 1
             ]);
+        }else{
+            Reservation::where('id', $request->id)
+            ->update([
+                'is_partial_paid'       => 0
+            ]);
         }
 
         if($request->isdone == "true"){
             Reservation::where('id', $request->id)
             ->update([
                 'is_done'               => 1
+            ]);
+        }else{
+            Reservation::where('id', $request->id)
+            ->update([
+                'is_done'               => 0
             ]);
         }
 
