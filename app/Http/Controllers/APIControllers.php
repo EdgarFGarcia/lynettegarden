@@ -326,7 +326,7 @@ class APIControllers extends Controller
     public function getcancelledreservation(){
         return response()->json([
             'response'      => true,
-            'data'          => Reservation::whereBetween('date_of_reservation', [$this->now->startOfMonth()->format("Y-m-d"), $this->now->endOfMonth()->format("Y-m-d")])->whereNotNull('deleted_at')->get()->count()
+            'data'          => Reservation::whereBetween('date_of_reservation', [$this->now->startOfMonth()->format("Y-m-d"), $this->now->endOfMonth()->format("Y-m-d")])->onlyTrashed()->get()->count()
         ], 200);
     }
 
