@@ -116,6 +116,7 @@ Route::delete('/deletethisreservation', [App\Http\Controllers\APIControllers::cl
 Route::get('/fetchcancelrequest', [App\Http\Controllers\APIControllers::class, 'fetchcancelrequest'])->middleware('auth');
 Route::get('/tobecancelled', [App\Http\Controllers\APIControllers::class, 'tobecancelled'])->middleware('auth');
 Route::post('/confirmcancellation', [App\Http\Controllers\APIControllers::class, 'confirmcancellation'])->middleware('auth');
+Route::get('/autorevoke', [App\Http\Controllers\APIControllers::class, 'autorevoke'])->middleware('auth');
 
 /**
  * Generate Reports Web Call

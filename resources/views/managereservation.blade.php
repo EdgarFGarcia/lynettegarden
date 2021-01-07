@@ -124,6 +124,7 @@
     $(document).ready(function(){
         $('#managereservationtable').DataTable();
         fetchmanagereservation();
+        autorevokereservation();
     });
 
     function fetchmanagereservation(){
@@ -219,6 +220,23 @@
             }
         });
     });
+
+    function autorevokereservation(){
+        $.ajax({
+            url: "{{ url('/autorevoke') }}",
+            method: "GET"
+        }).done(function(response){
+            // console.log(response);
+            if(response.response){
+                fetchmanagereservation();
+            }
+            setTimeout(
+                function(){
+                    autorevokereservation();
+                }, 300000
+            );
+        });
+    }
 
 </script>
 @endsection

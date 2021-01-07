@@ -603,4 +603,32 @@ class APIControllers extends Controller
         ], 200);
     }
 
+    /**
+     * Auto revoke
+     */
+    public function autorevoke(){
+        $data = Reservation::where('date_of_reservation', '<', Carbon::now()->subDay())->where('is_done', 0)->where('is_paid_full', 0)->where('is_partial_paid', 0)->get();
+        foreach($data as $out){
+            $deleterecord = Reservation::where('id', $out->id)->delete();
+            $updaterecord = DB::table('reservations')->where('id', $out->id)->update([
+                'is_email_sent'         => 1
+            ]);
+            $to_name = $out->mobilenumber;
+            $to_email = $out->email;
+            $data = array(
+                "name"              => "Hi There", 
+                "control_number"    => $out->control_number,
+            );
+            Mail::send("emails.cancelledreservation", $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+            ->subject("Booking Revoke");
+            $message->from("rojomae527@gmail.com","Booking Revoke");
+            });
+        }
+
+        return response()->json([
+            'response'          => true
+        ], 200);
+    }
+
 }
