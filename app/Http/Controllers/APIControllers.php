@@ -189,18 +189,18 @@ class APIControllers extends Controller
 
     public function makereservation(Request $request){
         $validation = Validator::make($request->all(), [
-            'firstname'         => 'required|string',
-            'lastname'          => 'required|string',
-            'dateofbirth'       => 'required|date',
-            'emailaddress'      => 'required|email',
-            'contactnumber'     => 'required|numeric',
-            'bldgno'            => 'required|string',
-            'barangay'          => 'required|string',
-            'city'              => 'required|string',
-            'state'             => 'required|string',
-            'country'           => 'required|string',
-            'date'              => 'required|date',
-            'time'              => 'required'
+            'firstname'         => 'sometimes|string',
+            'lastname'          => 'sometimes|string',
+            'dateofbirth'       => 'sometimes|date',
+            'emailaddress'      => 'sometimes|email',
+            'contactnumber'     => 'sometimes|numeric',
+            'bldgno'            => 'sometimes|string',
+            'barangay'          => 'sometimes|string',
+            'city'              => 'sometimes|string',
+            'state'             => 'sometimes|string',
+            'country'           => 'sometimes|string',
+            'date'              => 'sometimes|date',
+            'time'              => 'sometimes'
         ]);
         
         if($validation->fails()){

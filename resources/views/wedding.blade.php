@@ -108,7 +108,7 @@
     <div class="col-md-12" style="background-color: #333333; height:100%;">
         <div class="row">
             <div class="col-md-6 mt-5" style="background-color: #777777; border-radius: 8px; height:960px;">
-                <img src="img/contactIcon.png" class="contact">
+                <!-- <img src="img/contactIcon.png" class="contact"> -->
                 <div class="col-md-6 mx-auto">
                     <legend class="mx-auto" style="color: #fff;">Please fill out the form</legend>
                     <label for="firstname" style="color: #fff;">Firstname</label>
@@ -130,7 +130,7 @@
                     <label for="contactnumber" style="color: #fff;">Contact Number</label>
                     <input type="text" class="form-control" id="contactnumber" placeholder="Contact Number"/>
                 </div>
-                <div class="col-md-6 mx-auto">
+                <!-- <div class="col-md-6 mx-auto">
                     <label for="bldgno" style="color: #fff;">House No. | Bldg No. | Street No.</label>
                     <input type="text" class="form-control" id="bldgno" placeholder="123 Street Name"/>
                 </div>
@@ -149,7 +149,7 @@
                 <div class="col-md-6 mx-auto">
                     <label for="country" style="color: #fff;">Country</label>
                     <input type="text" class="form-control" id="country" placeholder="Philippines"/>
-                </div>
+                </div> -->
                 <br/>
                 <div class="col-md-6 mx-auto">
                     <button class="btn btn-warning" id="proceedreservation">Proceed</button>
@@ -211,25 +211,35 @@
     // });
 
     $(document).on('click', '#confirmbutton', function(){
+
+        var datenow = moment().add(13, 'days').format("Y-MM-DD");
         date = $('#datedata').val();
         time = $('#timedata').val();
-        $.ajax({
-            url: "{{ url('/checkdatetimeavailability') }}",
-            method: "GET",
-            data: {
-                date: date,
-                time: time
-            }
-        }).done(function(res){
-            if(res.response){
-                toastr.success(res.message);
-                $('#exampleModalCenter').modal('hide');
-                $('.tohideifpassed').attr("hidden",true);
-                $('.reservationform').attr("hidden", false);
-            }else{
-                toastr.info(res.message);
-            }
-        });
+
+        console.log(date);
+        console.log(datenow);
+
+        if(date < datenow){
+            toastr.error("Selected Date should be 2 weeks prior to current date, or " + datenow + " Onwards!");
+        }else{
+            $.ajax({
+                url: "{{ url('/checkdatetimeavailability') }}",
+                method: "GET",
+                data: {
+                    date: date,
+                    time: time
+                }
+            }).done(function(res){
+                if(res.response){
+                    toastr.success(res.message);
+                    $('#exampleModalCenter').modal('hide');
+                    $('.tohideifpassed').attr("hidden",true);
+                    $('.reservationform').attr("hidden", false);
+                }else{
+                    toastr.info(res.message);
+                }
+            });
+        }
     });
 
     $(document).on('click', '#proceedreservation', function(){

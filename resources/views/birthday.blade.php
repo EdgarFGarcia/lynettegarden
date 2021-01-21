@@ -211,25 +211,30 @@
     // });
 
     $(document).on('click', '#confirmbutton', function(){
+        var datenow = moment().add(13, 'days').format("Y-MM-DD");
         date = $('#datedata').val();
         time = $('#timedata').val();
-        $.ajax({
-            url: "{{ url('/checkdatetimeavailability') }}",
-            method: "GET",
-            data: {
-                date: date,
-                time: time
-            }
-        }).done(function(res){
-            if(res.response){
-                toastr.success(res.message);
-                $('#exampleModalCenter').modal('hide');
-                $('.tohideifpassed').attr("hidden",true);
-                $('.reservationform').attr("hidden", false);
-            }else{
-                toastr.info(res.message);
-            }
-        });
+        if(date < datenow){
+            toastr.error("Selected Date should be 2 weeks prior to current date, or " + datenow + " Onwards!");
+        }else{
+            $.ajax({
+                url: "{{ url('/checkdatetimeavailability') }}",
+                method: "GET",
+                data: {
+                    date: date,
+                    time: time
+                }
+            }).done(function(res){
+                if(res.response){
+                    toastr.success(res.message);
+                    $('#exampleModalCenter').modal('hide');
+                    $('.tohideifpassed').attr("hidden",true);
+                    $('.reservationform').attr("hidden", false);
+                }else{
+                    toastr.info(res.message);
+                }
+            });
+        }
     });
 
     $(document).on('click', '#proceedreservation', function(){

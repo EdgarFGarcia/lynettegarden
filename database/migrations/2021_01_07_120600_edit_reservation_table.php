@@ -15,7 +15,7 @@ class EditReservationTable extends Migration
     {
         //
         Schema::table('reservations', function (Blueprint $table) {
-            $table->tinyInteger('is_email_sent')->default(0)->after('id');
+            $table->string('is_email_sent')->default(0)->after('id');
         });
     }
 
