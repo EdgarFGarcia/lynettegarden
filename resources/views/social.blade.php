@@ -130,7 +130,7 @@
                     <label for="contactnumber" style="color: #fff;">Contact Number</label>
                     <input type="text" class="form-control" id="contactnumber" placeholder="Contact Number"/>
                 </div>
-                <div class="col-md-6 mx-auto">
+                <!-- <div class="col-md-6 mx-auto">
                     <label for="bldgno" style="color: #fff;">House No. | Bldg No. | Street No.</label>
                     <input type="text" class="form-control" id="bldgno" placeholder="123 Street Name"/>
                 </div>
@@ -149,7 +149,7 @@
                 <div class="col-md-6 mx-auto">
                     <label for="country" style="color: #fff;">Country</label>
                     <input type="text" class="form-control" id="country" placeholder="Philippines"/>
-                </div>
+                </div> -->
                 <br/>
                 <div class="col-md-6 mx-auto">
                     <button class="btn btn-warning" id="proceedreservation">Proceed</button>
