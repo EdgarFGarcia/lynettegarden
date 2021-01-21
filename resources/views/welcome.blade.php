@@ -144,7 +144,7 @@
             <div class="row portfolio">
             <div class="col-md-3 text-center">
                 <div class="card" style="width: 16rem; background-color: rgba(178,178,178,0.25)">
-                <img src="img/Wedding%20picture.jpg" class="card-img-top" alt="...">
+                <img src="{{ asset('assets/img/lynette/wedding.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">WEDDINGS</h5>
                     <p class="card-text">The highest happiness on earth is the happiness of marriage, plan your wedding now!</p>
@@ -155,7 +155,7 @@
                 
             <div class="col-md-3 text-center">
                 <div class="card" style="width: 16rem; background-color: rgba(244,128,0,0.25)">
-                <img src="img/Birthday%20picture.jpeg" class="card-img-top" alt="...">
+                <img src="{{ asset('assets/img/lynette/birthdaysss.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">BIRTHDAYS</h5>
                     <p class="card-text">May your birthday bring you as much happiness as you give to everyone who knows you. set your party now!</p>
@@ -166,7 +166,7 @@
                 
             <div class="col-md-3 text-center">
                 <div class="card" style="width: 16rem; background-color: rgba(131,7,242,0.25)">
-                <img src="img/Social%20Gathering%20picture.jpg" class="card-img-top" alt="...">
+                <img src="{{ asset('assets/img/lynette/birthdays.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">SOCIAL GATHERINGS</h5>
                     <p class="card-text">Not interacting with all your people will never know how amazing and creative they can be, plan your gathering now!</p>
@@ -177,7 +177,7 @@
             
             <div class="col-md-3 text-center">
                 <div class="card" style="width: 16rem; background-color: rgba(11,156,49,0.25)">
-                <img src="img/garden%20event%20picture.jpg" class="card-img-top" alt="...">
+                <img src="{{ asset('assets/img/lynette/gardenevents.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">GARDEN EVENTS</h5>
                     <p class="card-text">Gather and invite your people with our wonderful garden venue and be socialize, Book with us now!</p>

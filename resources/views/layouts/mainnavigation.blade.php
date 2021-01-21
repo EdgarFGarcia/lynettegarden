@@ -13,9 +13,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="#portfolio">EVENT PORTFOLIO</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="#team">OUR TEAM</a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="#contact">CONTACT US</a>
               </li>

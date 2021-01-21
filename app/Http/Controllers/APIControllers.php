@@ -622,7 +622,7 @@ class APIControllers extends Controller
             Mail::send("emails.cancelledreservation", $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
             ->subject("Booking Revoke");
-            $message->from("rojomae527@gmail.com","Booking Revoke");
+            $message->from("lieraarciaga08@gmail.com","Booking Revoke");
             });
         }
 

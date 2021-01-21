@@ -100,19 +100,19 @@
 
 /*----------------------------About---------------------------------------*/
 
-#about
+/* #about
 {
     padding: 60px;
     padding-top: 60px;
     padding-bottom: 50px;
     color: #444!important;
-    margin-left: 370px;
-}
-.about-content
+    /* margin-left: 370px; */
+} */
+/* .about-content
 {
     padding-top: 2px;
     text-align: center!important;
-}
+} */
 /*-------------------------(FORTFOLIO)------------------------------------*/
 
 #portfolio
