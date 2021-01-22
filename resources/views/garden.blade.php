@@ -195,7 +195,9 @@
         }).done(function(res){
             $.each(res.data, function(i, v){
                 // console.log(res.data[i].id);
-                $('.themeplacer').append("<div class='box'><div class='imgBx'><img src='{{ asset("assets/img/lynette/garden.jpg") }}'/></div><div class='content'><h3>"+v.name+"</h3><small style='font-size: 12px;'>"+v.description+"</small><br/><small style='font-size: 12px;'>Price: "+v.price+"</small><br/><small style='font-size: 12px;'>"+v.min_pax+"-"+v.max_pax+" pax</small><br/><center><button class='btn btn-info' onclick='getthemeidandprice("+res.data[i].id+")' data-toggle='modal' data-target='#exampleModalCenter'>Reserve Now</button></center><input type='hidden' value='"+res.data[i].id+"' id='themeid'/><input type='hidden' value='"+res.data[i].name+"' id='themename'/><input type='hidden' value='"+res.data[i].price+"' id='pricetopass'/></div></div>");
+                var basepath = "{{ asset('assets/img/lynette/') }}";
+                var images = "/gardenevent"+i+".jpg";
+                $('.themeplacer').append("<div class='box'><div class='imgBx'><img src='"+basepath+"/"+images+"'/></div><div class='content'><h3>"+v.name+"</h3><small style='font-size: 12px;'>"+v.description+"</small><br/><small style='font-size: 12px;'>Price: "+v.price+"</small><br/><small style='font-size: 12px;'>"+v.min_pax+"-"+v.max_pax+" pax</small><br/><center><button class='btn btn-info' onclick='getthemeidandprice("+res.data[i].id+")' data-toggle='modal' data-target='#exampleModalCenter'>Reserve Now</button></center><input type='hidden' value='"+res.data[i].id+"' id='themeid'/><input type='hidden' value='"+res.data[i].name+"' id='themename'/><input type='hidden' value='"+res.data[i].price+"' id='pricetopass'/></div></div>");
             });
         });
     }

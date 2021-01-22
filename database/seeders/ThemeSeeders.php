@@ -54,6 +54,7 @@ class ThemeSeeders extends Seeder
         // social gathering
         DB::table('themes')->insert([
             'name'          => 'Disco Inferno Theme',
+            'image_url'     => 'assets/img/lynette/SOCIAL_GATHERING0.jpg',
             'category_id'   => 4,
             'min_pax'       => 15,
             'max_pax'       => 60,
@@ -64,6 +65,7 @@ class ThemeSeeders extends Seeder
         ]);
         DB::table('themes')->insert([
             'name'          => 'Urban Graffiti Theme',
+            'image_url'     => 'assets/img/lynette/SOCIAL_GATHERING1.jpg',
             'category_id'   => 4,
             'min_pax'       => 15,
             'max_pax'       => 60,
@@ -74,6 +76,7 @@ class ThemeSeeders extends Seeder
         ]);
         DB::table('themes')->insert([
             'name'          => 'Black & White Theme',
+            'image_url'     => 'assets/img/lynette/SOCIAL_GATHERING2.jpg',
             'category_id'   => 4,
             'min_pax'       => 15,
             'max_pax'       => 60,
