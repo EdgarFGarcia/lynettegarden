@@ -300,6 +300,7 @@ class APIControllers extends Controller
                             )
                             ->join('themes as b', 'a.themes_id', '=', 'b.id')
                             ->where('a.controlnumber', $request->controlnumber)
+                            ->where('a.is_cancelled', 0)
                             ->get()->first()
         ]);
     }

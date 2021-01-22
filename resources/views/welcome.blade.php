@@ -202,24 +202,28 @@
             }
         }).done(function(response){
             if(response.response){
-                $('#controlnumbermodal').modal('show');
-                $('#exampleModalLabel').text("Control Number: " + response.data.controlnumber);
-                $('#cnname').val('');
-                $('#cnname').val(response.data.name);
-                $('#cnreservationdate').val('');
-                $('#cnreservationdate').val(response.data.reservationdate);
-                $('#cnemail').val('');
-                $('#cnemail').val(response.data.email);
-                $('#cnmobilenumber').val('');
-                $('#cnmobilenumber').val(response.data.mobilenumber);
-                $('#cnthemename').val('');
-                $('#cnthemename').val(response.data.themename);
-                $('#cnprice').val('');
-                $('#cnprice').val(response.data.themeprice);
-                $('#cnpartialprice').val('');
-                $('#cnpartialprice').val(response.data.partialprice);
-                $('#controlnumberid').val('');
-                $('#controlnumberid').val(response.data.id);
+                if(response.data == null){
+                    toastr.error("No Record Found");
+                }else{
+                    $('#controlnumbermodal').modal('show');
+                    $('#exampleModalLabel').text("Control Number: " + response.data.controlnumber);
+                    $('#cnname').val('');
+                    $('#cnname').val(response.data.name);
+                    $('#cnreservationdate').val('');
+                    $('#cnreservationdate').val(response.data.reservationdate);
+                    $('#cnemail').val('');
+                    $('#cnemail').val(response.data.email);
+                    $('#cnmobilenumber').val('');
+                    $('#cnmobilenumber').val(response.data.mobilenumber);
+                    $('#cnthemename').val('');
+                    $('#cnthemename').val(response.data.themename);
+                    $('#cnprice').val('');
+                    $('#cnprice').val(response.data.themeprice);
+                    $('#cnpartialprice').val('');
+                    $('#cnpartialprice').val(response.data.partialprice);
+                    $('#controlnumberid').val('');
+                    $('#controlnumberid').val(response.data.id);
+                }
             }else{
                 toastr.error(response.message);
             }
