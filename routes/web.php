@@ -123,3 +123,4 @@ Route::get('/autorevoke', [App\Http\Controllers\APIControllers::class, 'autorevo
  */
 Route::get('/generatereport', [App\Http\Controllers\APIControllers::class, 'generatereport'])->middleware('auth');
 Route::get('/searchthisreport', [App\Http\Controllers\APIControllers::class, 'searchthisreport'])->middleware('auth');
+Route::get('/getarchivereport', [App\Http\Controllers\APIControllers::class, 'getarchivereport'])->middleware('auth');

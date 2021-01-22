@@ -603,6 +603,36 @@ class APIControllers extends Controller
         ], 200);
     }
 
+    public function getarchivereport(){
+        $data = Reservation::onlyTrashed()->get();
+
+        $datas = [];
+
+        foreach($data as $out){
+            $datas[] = [
+                'id'                    => $out->id,
+                'name'                  => $out->firstname . " " . $out->lastname,
+                'mobile'                => $out->mobile_number,
+                'email'                 => $out->email,
+                'control_number'        => $out->controlnumber,
+                'theme'                 => $out->fetchreservationwiththemes->name,
+                'price'                 => $out->price,
+                'partial_price'         => $out->partial_price,
+                'is_paid_full'          => $out->is_paid_full == 0 ? "No" : "Yes",
+                'is_paid_partial'       => $out->is_partial_paid == 0 ? "No" : "Yes",
+                'is_done'               => $out->is_done == 0 ? "No" : "Yes",
+                'date_of_reservation'   => $out->date_of_reservation,
+                'time_of_reservation'   => $out->time_of_reservation
+            ];
+        }
+
+        return response()->json([
+            'response'              => true,
+            'data'                  => $datas
+        ], 200);
+
+    }
+
     /**
      * Auto revoke
      */

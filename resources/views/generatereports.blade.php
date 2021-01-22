@@ -20,6 +20,9 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection--}}
 
 @extends('layouts.admintemplate')
@@ -66,15 +69,43 @@
         </div>
     </div>
 </div>
+
+<div class="col-lg-12 col-md-12 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-header">
+            <h4>Archived Data</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped" id="archivedata">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Control Number</th>
+                            <th>Theme</th>
+                            <th>Price</th>
+                            <th>Date Of Reservation</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 
 @section('scripts')
 <script>
 var mainreporttable;
+var archivedatatable;
 $(document).ready(function(){
     $('#mainreport').DataTable();
     generatereport();
+    generatearchivereport();
 });
 function generatereport(){
     // var startdate = $('#startdate').val();
@@ -108,6 +139,33 @@ function generatereport(){
     // }else{
     //     toastr.error("Start Date and End Date should not be empty!");
     // }
+}
+
+function generatearchivereport(){
+    $.ajax({
+        url: "{{ url('/getarchivereport') }}",
+        method: "GET"
+    }).done(function(response){
+        if(response.response){
+                archivedatatable = $('#archivedata').DataTable().clear().destroy();
+                archivedatatable = $('#archivedata').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ],
+                    data: response.data,
+                    columns: [
+                        {"data": "name"},
+                        {"data": "mobile"},
+                        {"data": "email"},
+                        {"data": "control_number"},
+                        {"data": "theme"},
+                        {"data": "price"},
+                        {"data": "date_of_reservation"},
+                    ]
+                });
+            }
+    });
 }
 
 function searchthisreport(){
