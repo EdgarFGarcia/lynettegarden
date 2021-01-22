@@ -277,6 +277,9 @@
                 date: date,
                 time: time,
                 "_token": "{{ csrf_token() }}",
+            },
+            beforeSend: function(){
+                toastr.info("Please wait...");
             }
         }).done(function(res){
             if(res.response){
