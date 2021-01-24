@@ -389,10 +389,30 @@ class APIControllers extends Controller
 
     public function updatereservationinformation(Request $request){
         if($request->ispaidfull == "true"){
-            Reservation::where('id', $request->id)
-            ->update([
-                'is_paid_full'          => 1
-            ]);
+
+            $checkdata = Reservation::where('id', $request->id)->get();
+
+            if($checkdata[0]->is_paid_full != 1){
+                Reservation::where('id', $request->id)
+                ->update([
+                    'is_paid_full'          => 1
+                ]);
+    
+                $clientdata = Reservation::where('id', $request->id)->get();
+                $to_name    = $clientdata[0]->firstname . " " . $clientdata[0]->lastname;
+                $to_email   = $clientdata[0]->email;
+                $data = array(
+                    "name"              => $clientdata[0]->firstname . " " . $clientdata[0]->lastname,
+                    'control_number'    => $clientdata[0]->controlnumber,
+                    'amount'            => $clientdata[0]->price
+                );
+                Mail::send("emails.fullpayment", $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                ->subject("Full Payment Received");
+                $message->from("lieraarciaga08@gmail.com","Full Payment Received");
+                });
+            }
+
         }else{
             Reservation::where('id', $request->id)
             ->update([
@@ -401,10 +421,30 @@ class APIControllers extends Controller
         }
 
         if($request->ispaidpartial == "true"){
-            Reservation::where('id', $request->id)
-            ->update([
-                'is_partial_paid'       => 1
-            ]);
+
+            $checkdata = Reservation::where('id', $request->id)->get();
+
+            if($checkdata[0]->is_partial_paid != 1){
+                Reservation::where('id', $request->id)
+                ->update([
+                    'is_partial_paid'       => 1
+                ]);
+
+                $clientdata = Reservation::where('id', $request->id)->get();
+                $to_name    = $clientdata[0]->firstname . " " . $clientdata[0]->lastname;
+                $to_email   = $clientdata[0]->email;
+                $data = array(
+                    "name"              => $clientdata[0]->firstname . " " . $clientdata[0]->lastname,
+                    'control_number'    => $clientdata[0]->controlnumber,
+                    'amount'            => $clientdata[0]->partial_price
+                );
+                Mail::send("emails.partial", $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                ->subject("Partial Payment");
+                $message->from("lieraarciaga08@gmail.com","Partial Payment");
+                });
+            }
+
         }else{
             Reservation::where('id', $request->id)
             ->update([
@@ -413,10 +453,30 @@ class APIControllers extends Controller
         }
 
         if($request->isdone == "true"){
-            Reservation::where('id', $request->id)
-            ->update([
-                'is_done'               => 1
-            ]);
+
+            $checkdata = Reservation::where('id', $request->id)->get();
+
+            if($checkdata[0]->is_done != 1){
+                Reservation::where('id', $request->id)
+                ->update([
+                    'is_done'               => 1
+                ]);
+
+                $clientdata = Reservation::where('id', $request->id)->get();
+                $to_name    = $clientdata[0]->firstname . " " . $clientdata[0]->lastname;
+                $to_email   = $clientdata[0]->email;
+                $data = array(
+                    "name"              => $clientdata[0]->firstname . " " . $clientdata[0]->lastname,
+                    'control_number'    => $clientdata[0]->controlnumber,
+                    'amount'            => $clientdata[0]->partial_price
+                );
+                Mail::send("emails.done", $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                ->subject("Done Transaction");
+                $message->from("lieraarciaga08@gmail.com","Done Transaction");
+                });
+            }
+
         }else{
             Reservation::where('id', $request->id)
             ->update([

@@ -211,6 +211,9 @@
                 ispaidpartial: partialpaid,
                 isdone: isdone,
                 "_token": "{{ csrf_token() }}",
+            },
+            beforeSend: function(){
+                toastr.info("Please Wait...");
             }
         }).done(function(response){
             if(response.response){

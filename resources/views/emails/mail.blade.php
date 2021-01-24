@@ -5,5 +5,5 @@
 
 <p>To settle your balance, you can send it through PayMaya.</p>
 <p>PayMaya: 09951507244<br/></p>
-
+<p>Failure to do so, automatically cancel the booking within 24 hours.</p>
 <p>To verify your booking reservation you can use this reference number ({{$control_number}}) (valid until {{$reservation_date}})</p>
