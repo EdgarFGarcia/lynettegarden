@@ -175,13 +175,38 @@ class APIControllers extends Controller
             ], 200);
         }
 
-        $checkifavailable = Reservation::where('date_of_reservation', $request->date)->get();
-
-        if(sizeof($checkifavailable) < 3){
-            $checktime = Reservation::where('time_of_reservation', $request->time)->get();
+        if(($request->time > "08:00:00") && ($request->time < "12:00:00")){
+            $checkifavailable = Reservation::where('date_of_reservation', $request->date)->get();
+            if(sizeof($checkifavailable) < 2){
+                // $checktime = Reservation::where('time_of_reservation', $request->time)->get();
+                return response()->json([
+                    'response'      => true,
+                    'message'       => "Available Date And Time"
+                ], 200);
+            }else{
+                return response()->json([
+                    'response'      => false,
+                    'message'       => "Not Available"
+                ], 200);
+            }
+        }else if(($request->time > "13:00:00") && ($request->time < "17:00:00")){
+            $checkifavailable = Reservation::where('date_of_reservation', $request->date)->get();
+            if(sizeof($checkifavailable) < 2){
+                // $checktime = Reservation::where('time_of_reservation', $request->time)->get();
+                return response()->json([
+                    'response'      => true,
+                    'message'       => "Available Date And Time"
+                ], 200);
+            }else{
+                return response()->json([
+                    'response'      => false,
+                    'message'       => "Not Available"
+                ], 200);
+            }
+        }else{
             return response()->json([
-                'response'      => true,
-                'message'       => "Available Date And Time"
+                'response'          => false,
+                'message'           => "Lynette Garden can only accept reservation to these time: 08:00 AM to 12:00 PM, 01:00 PM to 05:00 PM"
             ], 200);
         }
 
