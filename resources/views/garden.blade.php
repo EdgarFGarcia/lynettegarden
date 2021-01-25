@@ -164,6 +164,87 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modaltac" tabindex="-1" role="dialog" aria-labelledby="modaltacTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltacTitle">Terms and Conditions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <h3>Welcome to Lynette Garden!</h3>
+            <p>
+            These terms and conditions outline the rules and regulations for the use of Lynette Garden's Website, located at http://35.184.235.66/.
+
+            By accessing this website we assume you accept these terms and conditions. Do not continue to use Lynette Garden if you do not agree to take all of the terms and conditions stated on this page.
+
+            The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Philippines
+            . Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
+
+
+
+            We employ the use of cookies. By accessing Lynette Garden, you agreed to use cookies in agreement with the Lynette Garden's Privacy Policy. 
+            </p>
+
+            <h3>Booking</h3>
+            <p>1. FCFS - first come first serve. 
+            2. If two clients book the same time,date,venue,themes, the first client pay for
+            the reservation will guarantee that schedule.
+            3. Strictly No time Extension
+            4. Booking per day have only 2(two) sessions morning and afternoon
+            by 8am to 12nn and 1pm to 5pm. 
+            5. The receipt generates or billing statements release 
+            after client transaction is already made.
+            6. We wound not be able to accept payment through credit card and any online transaction payment except Paymaya.
+            </p>
+
+            <h3>Payment</h3>
+            <p>
+            1. Payment for reservation can be made 24 hours, 
+            fail to do so will automatically cancel your request events.
+            2. Payment includes materials, labor, settings, and security and a
+            program materials.
+            3. Reservation will be confirmed on receipt of payment and may be
+            subject to cancellation. A receipt will be issued upon payment.
+            4. Due to limited event space we advise early reservation and payment
+            thru Paymaya to avoid dissapointments. 
+            5.The reservation will not be confirmed until payment 
+            is received.
+            6. Reservation to the venue will be refused if payment has not been received.
+            </p>
+
+            <h3>Cancellation</h3>
+            <p>
+            1. Cancelation of any reservation can be made 72hrs after the
+time you booked if not yet paid partial or fullpay, and 50% refunds for the clients who already deposited their 
+down payment if cancellation longer than 2 weeks before the event starts.
+2. Confirmation for cancelling reservation will be sent thru emails.
+3. Cancellation needs to be done in writing by e-mail to the organisers.
+ The date of cancellation is determined by the date of the e-mail or go the Lynette Gardens
+website and put your control number.
+4. In case of insufficient number of registrations the admin retains the right to cancel or postpone the event.
+            </p>
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" id="tac">I Agree to the terms and conditions
+                </label>
+            </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="continuebooking">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <!--------------------------------Footer--------------------------------->
     
     <section id="footer">
@@ -242,54 +323,65 @@
     });
 
     $(document).on('click', '#proceedreservation', function(){
-        $('#proceedreservation').attr("hidden", true);
-        var themeidtopass = themeid;
-        var pricetopass = $('#pricetopass').val();
-        console.log(themeid, pricetopass);
-        var firstname = $('#firstname').val();
-        var lastname = $('#lastname').val();
-        var dateofbirth = $('#dateofbirth').val();
-        var emailaddress = $('#emailaddress').val();
-        var contactnumber = $('#contactnumber').val();
-        var bldgno = $('#bldgno').val();
-        var barangay = $('#barangay').val();
-        var city = $('#city').val();
-        var state = $('#state').val();
-        var country = $('#country').val();
-        // console.log(themeid, firstname, lastname, dateofbirth, emailaddress, contactnumber, bldgno, barangay, city, state, country);
-        $.ajax({
-            url: "{{ url('/makereservation') }}",
-            method: "POST",
-            data: {
-                themeid: themeidtopass,
-                firstname: firstname,
-                lastname: lastname,
-                dateofbirth: dateofbirth,
-                emailaddress: emailaddress,
-                contactnumber: contactnumber,
-                bldgno: bldgno,
-                barangay: barangay,
-                city: city,
-                state: state,
-                country: country,
-                date: date,
-                time: time,
-                "_token": "{{ csrf_token() }}",
-            },
-            beforeSend: function(){
-                toastr.info("Please wait...");
-            }
-        }).done(function(res){
-            if(res.response){
-                toastr.success(res.message);
-                setTimeout(
-                function() {
-                    window.location.replace("{{ url('/') }}");
-                }, 5000);
-            }else{
-                toastr.error(res.message);
-            }
-        });
+        $('#modaltac').modal('show');
+    });
+
+    $(document).on('click', '#continuebooking', function(){
+        var tac = $('#tac').is(':checked');
+        if(tac == true){
+            $('#proceedreservation').attr("hidden", true);
+            var themeidtopass = themeid;
+            var pricetopass = $('#pricetopass').val();
+            console.log(themeid, pricetopass);
+            var firstname = $('#firstname').val();
+            var lastname = $('#lastname').val();
+            var dateofbirth = $('#dateofbirth').val();
+            var emailaddress = $('#emailaddress').val();
+            var contactnumber = $('#contactnumber').val();
+            var bldgno = $('#bldgno').val();
+            var barangay = $('#barangay').val();
+            var city = $('#city').val();
+            var state = $('#state').val();
+            var country = $('#country').val();
+            // console.log(themeid, firstname, lastname, dateofbirth, emailaddress, contactnumber, bldgno, barangay, city, state, country);
+            $.ajax({
+                url: "{{ url('/makereservation') }}",
+                method: "POST",
+                data: {
+                    themeid: themeidtopass,
+                    firstname: firstname,
+                    lastname: lastname,
+                    dateofbirth: dateofbirth,
+                    emailaddress: emailaddress,
+                    contactnumber: contactnumber,
+                    bldgno: bldgno,
+                    barangay: barangay,
+                    city: city,
+                    state: state,
+                    country: country,
+                    date: date,
+                    time: time,
+                    "_token": "{{ csrf_token() }}",
+                },
+                beforeSend: function(){
+                    toastr.info("Please wait...");
+                }
+            }).done(function(res){
+                if(res.response){
+                    toastr.success(res.message);
+                    setTimeout(
+                    function() {
+                        window.location.replace("{{ url('/') }}");
+                    }, 5000);
+                }else{
+                    toastr.error(res.message);
+                }
+            });
+        }
+
+        if(tac == false){
+            toastr.error("Please agree to the terms and conditions");
+        }
     });
 
 </script>
