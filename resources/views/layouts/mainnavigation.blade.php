@@ -67,6 +67,18 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-4">
+                <label for="ispartial">Partial Payment Status</label>
+                <input type="text" id="ispartial" class="form-control" disabled/>
+              </div>
+              <div class="col-md-4">
+                <label for="idfull">Partial Payment Status</label>
+                <input type="text" id="idfull" class="form-control" disabled/>
+              </div>
+              <div class="col-md-4">
+                <label for="isdone">Partial Payment Status</label>
+                <input type="text" id="isdone" class="form-control" disabled/>
+              </div>
             </div>
           </div>
           <div class="modal-footer">

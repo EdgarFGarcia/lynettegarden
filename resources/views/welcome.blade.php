@@ -223,6 +223,12 @@
                     $('#cnpartialprice').val(response.data.partialprice);
                     $('#controlnumberid').val('');
                     $('#controlnumberid').val(response.data.id);
+                    $('#ispartial').val('');
+                    $('#ispartial').val(response.data.is_partial_paid);
+                    $('#idfull').val('');
+                    $('#idfull').val(response.data.is_paid_full);
+                    $('#isdone').val('');
+                    $('#isdone').val(response.data.is_done);
                 }
             }else{
                 toastr.error(response.message);

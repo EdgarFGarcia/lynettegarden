@@ -321,7 +321,10 @@ class APIControllers extends Controller
                                 // 'b.price as themeprice',
                                 // 'a.partial_price as partialprice'
                                 DB::raw("FORMAT(b.price, 2) as themeprice"),
-                                DB::raw("FORMAT(a.partial_price, 2) as partialprice")
+                                DB::raw("FORMAT(a.partial_price, 2) as partialprice"),
+                                DB::raw("IF(a.is_paid_full = 1, 'YES', 'NO') as is_paid_full"),
+                                DB::raw("IF(a.is_partial_paid = 1, 'YES', 'NO') as is_partial_paid"),
+                                DB::raw("IF(a.is_done = 1, 'YES', 'NO') as is_done")
                             )
                             ->join('themes as b', 'a.themes_id', '=', 'b.id')
                             ->where('a.controlnumber', $request->controlnumber)
