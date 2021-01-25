@@ -175,7 +175,7 @@ class APIControllers extends Controller
             ], 200);
         }
 
-        if(($request->time > "08:00:00") && ($request->time < "12:00:00")){
+        if(($request->time > "07:59:00") && ($request->time < "12:00:00")){
             $checkifavailable = Reservation::where('date_of_reservation', $request->date)->get();
             if(sizeof($checkifavailable) < 2){
                 // $checktime = Reservation::where('time_of_reservation', $request->time)->get();
@@ -189,7 +189,7 @@ class APIControllers extends Controller
                     'message'       => "Not Available"
                 ], 200);
             }
-        }else if(($request->time > "13:00:00") && ($request->time < "17:00:00")){
+        }else if(($request->time > "12:59:00") && ($request->time < "17:00:00")){
             $checkifavailable = Reservation::where('date_of_reservation', $request->date)->get();
             if(sizeof($checkifavailable) < 2){
                 // $checktime = Reservation::where('time_of_reservation', $request->time)->get();
