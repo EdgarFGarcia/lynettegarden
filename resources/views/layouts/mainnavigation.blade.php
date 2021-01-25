@@ -72,11 +72,11 @@
                 <input type="text" id="ispartial" class="form-control" disabled/>
               </div>
               <div class="col-md-4">
-                <label for="idfull">Partial Payment Status</label>
+                <label for="idfull">Full Payment Status</label>
                 <input type="text" id="idfull" class="form-control" disabled/>
               </div>
               <div class="col-md-4">
-                <label for="isdone">Partial Payment Status</label>
+                <label for="isdone">Done Transcation</label>
                 <input type="text" id="isdone" class="form-control" disabled/>
               </div>
             </div>
